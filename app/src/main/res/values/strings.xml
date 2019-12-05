@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Secure</string>
+    <string name="byuccendigital">By uccen digital</string>
+    <string name="security_code">Security code</string>
+    <string name="confirm_security_code">Confirm security code</string>
+    <string name="new_security_code">New security code</string>
+    <string name="copyright">Secure by uccen digital © 2019</string>
+</resources>
