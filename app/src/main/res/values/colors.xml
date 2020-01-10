@@ -19,4 +19,5 @@
     <color name="colorGrey1">#BDBDBD</color>
     <color name="colorGrey">#757575</color>
     <color name="colorGrey2">#424242</color>
+    <color name="transparent">#00000000</color>
 </resources>

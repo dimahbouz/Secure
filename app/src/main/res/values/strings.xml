@@ -5,4 +5,8 @@
     <string name="confirm_security_code">Confirm security code</string>
     <string name="new_security_code">New security code</string>
     <string name="copyright">Secure by uccen digital © 2019</string>
+    <string name="error_confirmation_security_code">Your confirmation is not same to your security code. try again...</string>
+    <string name="error_incorrect_security_code">The security code is not correct, try again...</string>
+    <string name="enabled">Enabled</string>
+    <string name="settings">Settings</string>
 </resources>

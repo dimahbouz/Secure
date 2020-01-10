@@ -54,102 +54,78 @@
             <LinearLayout
                 android:id="@+id/code1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <com.andrognito.pinlockview.IndicatorDots
                     android:id="@+id/indicator_dots1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_gravity="center_horizontal"
                     app:dotDiameter="12dp"
-                    app:dotEmptyBackground="@color/colorPrimary"
-                    app:dotFilledBackground="@color/colorBlue"
-                    app:dotSpacing="16dp"
-                    app:indicatorType="fillWithAnimation" />
+                    app:dotSpacing="18dp" />
 
                 <com.andrognito.pinlockview.PinLockView
                     android:id="@+id/pin_lock_view1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    app:keypadButtonSize="72dp"
-                    app:keypadDeleteButtonDrawable="@drawable/ic_back"
-                    app:keypadDeleteButtonPressedColor="#C8C8C8"
-                    app:keypadDeleteButtonSize="16dp"
-                    app:keypadHorizontalSpacing="36dp"
-                    app:keypadShowDeleteButton="false"
-                    app:keypadTextColor="#E6E6E6"
+                    app:keypadButtonSize="64dp"
+                    app:keypadHorizontalSpacing="28dp"
                     app:keypadTextSize="16dp"
-                    app:keypadVerticalSpacing="24dp"
-                    app:pinLength="6" />
+                    app:keypadVerticalSpacing="18dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/code2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 tools:visibility="gone">
 
                 <com.andrognito.pinlockview.IndicatorDots
                     android:id="@+id/indicator_dots2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_gravity="center_horizontal"
                     app:dotDiameter="12dp"
-                    app:dotEmptyBackground="@color/colorPrimary"
-                    app:dotFilledBackground="@color/colorBlue"
-                    app:dotSpacing="16dp"
-                    app:indicatorType="fillWithAnimation" />
+                    app:dotSpacing="18dp" />
 
                 <com.andrognito.pinlockview.PinLockView
                     android:id="@+id/pin_lock_view2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    app:keypadButtonSize="72dp"
-                    app:keypadDeleteButtonDrawable="@drawable/ic_back"
-                    app:keypadDeleteButtonPressedColor="#C8C8C8"
-                    app:keypadDeleteButtonSize="16dp"
-                    app:keypadHorizontalSpacing="36dp"
-                    app:keypadShowDeleteButton="false"
-                    app:keypadTextColor="#E6E6E6"
+                    app:keypadButtonSize="64dp"
+                    app:keypadHorizontalSpacing="28dp"
                     app:keypadTextSize="16dp"
-                    app:keypadVerticalSpacing="24dp"
-                    app:pinLength="6" />
+                    app:keypadVerticalSpacing="18dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/code3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 tools:visibility="gone">
 
                 <com.andrognito.pinlockview.IndicatorDots
                     android:id="@+id/indicator_dots3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:layout_gravity="center_horizontal"
                     app:dotDiameter="12dp"
-                    app:dotEmptyBackground="@color/colorPrimary"
-                    app:dotFilledBackground="@color/colorBlue"
-                    app:dotSpacing="16dp"
-                    app:indicatorType="fillWithAnimation" />
+                    app:dotSpacing="18dp" />
 
                 <com.andrognito.pinlockview.PinLockView
                     android:id="@+id/pin_lock_view3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    app:keypadButtonSize="72dp"
-                    app:keypadDeleteButtonDrawable="@drawable/ic_back"
-                    app:keypadDeleteButtonPressedColor="#C8C8C8"
-                    app:keypadDeleteButtonSize="16dp"
-                    app:keypadHorizontalSpacing="36dp"
-                    app:keypadShowDeleteButton="false"
-                    app:keypadTextColor="#E6E6E6"
+                    app:keypadButtonSize="64dp"
+                    app:keypadHorizontalSpacing="28dp"
                     app:keypadTextSize="16dp"
-                    app:keypadVerticalSpacing="24dp"
-                    app:pinLength="6" />
+                    app:keypadVerticalSpacing="18dp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -157,17 +133,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_width="391dp"
+        android:layout_height="783dp"
         android:gravity="bottom"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="529dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/copyrightLockActivity"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/copyright"
             android:textAlignment="center"

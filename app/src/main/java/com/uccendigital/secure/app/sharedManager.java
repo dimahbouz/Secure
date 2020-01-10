@@ -2,15 +2,17 @@ package com.uccendigital.secure.app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 public class sharedManager {
     Context context;
-    SharedPreferences.Editor editor = this.prefs.edit();
     SharedPreferences prefs;
+    Editor editor;
 
     public sharedManager(Context context, String pref) {
         this.context = context;
         this.prefs = context.getSharedPreferences(pref, 0);
+        this.editor = this.prefs.edit();
     }
 
     public void putInt(String index, int value) {
