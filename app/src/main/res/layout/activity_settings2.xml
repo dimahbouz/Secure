@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings2Activity"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <!-- HEADER -->
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:justifyContent="space_between"
+        app:alignItems="center"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/title_settings2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/settings"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/size24"
+            android:textStyle="bold"/>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <!-- WHITELIST -->
+    <LinearLayout
+        android:id="@+id/addwhitelistbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        tools:ignore="MissingConstraints">
+
+        <!-- ADD WHITELIST -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/size8">
+            <TextView
+                android:id="@+id/whitelistAddBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlue"
+                android:padding="@dimen/size8"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:text="@string/add"></TextView>
+
+            <LinearLayout
+                android:id="@+id/whitelistAddBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="@dimen/size8"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/whitelistAddName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:focusedByDefault="false"
+                    android:hint="@string/name_phonenumber"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/edittext"
+                    android:padding="@dimen/size8"></EditText>
+
+                <EditText
+                    android:id="@+id/whitelistAddSerial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/size8"
+                    android:inputType="number"
+                    android:focusedByDefault="false"
+                    android:hint="@string/serialnumber"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/edittext"
+                    android:padding="@dimen/size8"></EditText>
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/whitelistCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size8"
+                        android:background="@color/colorGrey2"
+                        android:textColor="@color/colorPrimary"
+                        android:textAlignment="center"
+                        android:text="@string/cancel"></TextView>
+
+                    <TextView
+                        android:id="@+id/whitelistAdd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size8"
+                        android:background="@color/colorBlue"
+                        android:textColor="@color/colorPrimary"
+                        android:textAlignment="center"
+                        android:text="@string/add"></TextView>
+
+                </com.google.android.flexbox.FlexboxLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- LISTVIEW -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listviewnum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="1dp"
+                android:headerDividersEnabled="true"
+                android:footerDividersEnabled="true"
+                android:visibility="visible">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/whitelistEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/size24"
+                android:gravity="center"
+                android:text="@string/empty_list"
+                android:textSize="@dimen/size24"
+                android:textStyle="bold"
+                android:textColor="@color/colorGrey"></TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- HIDE APP -->
+    <LinearLayout
+        android:id="@+id/hideAppBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hideAppHelp"
+                android:padding="@dimen/size8"
+                android:background="@color/colorBlue"
+                android:textColor="@color/colorPrimaryDark"></TextView>
+
+            <Switch
+                android:id="@+id/hideAppSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size8"
+                android:text="@string/enabled"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/size22"
+                android:textStyle="bold"></Switch>
+        </LinearLayout>
+
+        <!--
+        <LinearLayout
+            android:id="@+id/hideAppEnabledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/size8">
+
+            <Spinner
+                android:id="@+id/hideAppSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorPrimary"
+                android:textColor="@color/colorPrimary"></Spinner>
+        </LinearLayout>
+        -->
+    </LinearLayout>
+
+    <!-- NUMBER EDITOR -->
+    <LinearLayout
+        android:id="@+id/numberBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+            <TextView
+                android:id="@+id/securityNumHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/securityNumHelp"
+                android:padding="@dimen/size8"
+                android:background="@color/colorBlue"
+                android:textColor="@color/colorPrimaryDark"
+                android:visibility="gone"></TextView>
+
+        <!-- SHOW NUMBER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/size8">
+
+                <TextView
+                    android:id="@+id/numberType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/security_num"
+                    android:textSize="@dimen/size18sp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/numberInt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/size16"
+                    android:text="@string/add"></TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/editNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlue"
+                android:padding="@dimen/size8"
+                android:layout_margin="@dimen/size8"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:text="@string/edit"></TextView>
+
+        </LinearLayout>
+
+        <!-- EDIT NUMBER -->
+        <LinearLayout
+            android:id="@+id/numberEditor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/size8"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/numberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/size8"
+                android:inputType="number"
+                android:focusedByDefault="false"
+                android:hint="@string/security_num"
+                android:textColorHint="@color/colorPrimary"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/edittext"
+                android:padding="@dimen/size8"></EditText>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cancelNumberEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size8"
+                    android:background="@color/colorGrey2"
+                    android:textColor="@color/colorPrimary"
+                    android:textAlignment="center"
+                    android:text="@string/cancel"></TextView>
+
+                <TextView
+                    android:id="@+id/validNumberEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size8"
+                    android:background="@color/colorBlue"
+                    android:textColor="@color/colorPrimary"
+                    android:textAlignment="center"
+                    android:text="@string/valid"></TextView>
+
+            </com.google.android.flexbox.FlexboxLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

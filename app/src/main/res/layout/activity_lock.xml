@@ -25,14 +25,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="20dp">
 
             <ImageView
                 android:id="@+id/startLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
                 android:layout_gravity="center"
-                android:src="@drawable/logo" />
+                android:src="@drawable/lock" />
 
             <TextView
                 android:id="@+id/LockActivityTitle"
@@ -41,7 +41,7 @@
                 android:text="@string/security_code"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="36dp" />
+                android:textSize="@dimen/size24" />
 
         </LinearLayout>
 
@@ -63,7 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     app:dotDiameter="12dp"
-                    app:dotSpacing="18dp" />
+                    app:dotSpacing="18dp"
+                    android:layout_marginVertical="10sp"/>
 
                 <com.andrognito.pinlockview.PinLockView
                     android:id="@+id/pin_lock_view1"
@@ -89,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     app:dotDiameter="12dp"
-                    app:dotSpacing="18dp" />
+                    app:dotSpacing="18dp"
+                    android:layout_marginVertical="10sp"/>
 
                 <com.andrognito.pinlockview.PinLockView
                     android:id="@+id/pin_lock_view2"
@@ -115,7 +117,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     app:dotDiameter="12dp"
-                    app:dotSpacing="18dp" />
+                    app:dotSpacing="18dp"
+                    android:layout_marginVertical="10sp"/>
 
                 <com.andrognito.pinlockview.PinLockView
                     android:id="@+id/pin_lock_view3"
@@ -133,9 +136,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="391dp"
-        android:layout_height="783dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="bottom"
+        android:paddingBottom="@dimen/size8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

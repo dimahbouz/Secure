@@ -14,14 +14,17 @@ import android.widget.Toast;
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
-import com.uccendigital.secure.app.s;
-import com.uccendigital.secure.app.sharedManager;
+import com.uccendigital.secure.app.Hadher;
+import com.uccendigital.secure.app.SharedManager;
+import com.uccendigital.secure.services.StoreService;
+
+import java.util.Date;
 
 public class LockActivity extends AppCompatActivity {
 
-    sharedManager AppShared, SShared;
-    s s;
-    int iffer, action;
+    SharedManager AppShared, hadShared;
+    Hadher hadher;
+    int action;
     Boolean change;
     private IndicatorDots mIndicatorDots1, mIndicatorDots2, mIndicatorDots3;
     private PinLockView mPinLockView1, mPinLockView2, mPinLockView3;
@@ -67,20 +70,33 @@ public class LockActivity extends AppCompatActivity {
 
             if (Code1.equals(code)) {
 
-                int a = Integer.parseInt(Code1);
-                s = new s(getApplicationContext());
-                int newIffer = s.putIffer(a);
+                hadher = new Hadher(getApplicationContext());
+                hadher.putIffer("iffer", Code1);
+                hadher.putPoints(70);
 
-                SShared.putInt("iffer", newIffer);
+                Date date = new Date();
+                int now = (int) date.getTime();
+                AppShared.putInt("fs",now);
 
-                if (iffer == -1) {
-                    AppShared.putStr("security", "done");
+                /*
+                Toast.makeText(LockActivity.this, "Lanch StoreService from LockActivity ... ", Toast.LENGTH_SHORT).show();
+                Intent storeintent = new Intent(getApplicationContext(), StoreService.class);
+                startService(storeintent);
+
+                 */
+
+                AppShared.putStr("security", "done");
+                AppShared.putbool("enable", false);
+
+                if (change) {
+                    finish();
+                } else {
                     Intent i = new Intent(LockActivity.this, HomeActivity.class);
-                    LockActivity.this.startActivity(i);
+                    startActivity(i);
+                    finish();
                 }
-                finish();
 
-            }else Toast.makeText(LockActivity.this, getResources().getString(R.string.error_confirmation_security_code), 0).show();
+            }else Toast.makeText(LockActivity.this, getResources().getString(R.string.error_confirmation_security_code), Toast.LENGTH_SHORT).show();
         }
 
         public void onEmpty() {
@@ -103,9 +119,9 @@ public class LockActivity extends AppCompatActivity {
              */
 
             Intent i;
-            int extractIffer = new s(LockActivity.this).extractIffer(iffer);
+            String iffer = new Hadher(getApplicationContext()).extractIffer("iffer");
 
-            if (Integer.parseInt(code) == extractIffer) {
+            if (code.equals(iffer)) {
                 if (action == 1 && change) {
                     /*
                     // Action == 1 && change == true
@@ -149,10 +165,16 @@ public class LockActivity extends AppCompatActivity {
         LLCode2 = findViewById(R.id.code2);
         LLCode3 = findViewById(R.id.code3);
 
-        s = new s(getApplicationContext());
+        hadher = new Hadher(getApplicationContext());
 
-        action = getIntent().getExtras().getInt("ACTION");
         change = getIntent().getExtras().getBoolean("CHANGE");
+
+        if (!hadher.checkIffer("iffer")) {
+            action = 0;
+        } else {
+            action = 1;
+        }
+
             /*
             // Action == 0 => Il n'y a pas de code d'acces, il faut en créer un
              */
@@ -164,10 +186,8 @@ public class LockActivity extends AppCompatActivity {
              */
 
 
-        AppShared = new sharedManager(this, "app");
-        SShared = new sharedManager(this, "s");
-
-        iffer = SShared.getInteg("iffer");
+        AppShared = new SharedManager(this, "app");
+        hadShared = new SharedManager(this, "hadher");
 
         lockactivityTitle = findViewById(R.id.LockActivityTitle);
 
@@ -178,12 +198,14 @@ public class LockActivity extends AppCompatActivity {
             LLCode2.setVisibility(View.GONE);
             LLCode3.setVisibility(View.GONE);
 
-        }else {
+        }else if (action == 1){
             lockactivityTitle.setText(R.string.security_code);
 
             LLCode1.setVisibility(View.GONE);
             LLCode2.setVisibility(View.GONE);
             LLCode3.setVisibility(View.VISIBLE);
+        } else {
+            finish();
         }
 
         this.mPinLockView1 = findViewById(R.id.pin_lock_view1);
@@ -211,4 +233,5 @@ public class LockActivity extends AppCompatActivity {
         this.mIndicatorDots3.setIndicatorType(2);
 
     }
+
 }

@@ -1,12 +1,103 @@
 <resources>
     <string name="app_name">Secure</string>
     <string name="byuccendigital">By uccen digital</string>
-    <string name="security_code">Security code</string>
-    <string name="confirm_security_code">Confirm security code</string>
-    <string name="new_security_code">New security code</string>
     <string name="copyright">Secure by uccen digital © 2019</string>
-    <string name="error_confirmation_security_code">Your confirmation is not same to your security code. try again...</string>
-    <string name="error_incorrect_security_code">The security code is not correct, try again...</string>
-    <string name="enabled">Enabled</string>
-    <string name="settings">Settings</string>
+
+    <!--
+    Introduction
+    -->
+    <string name="desc_intro1">Une petite application anti-vol, legère, simple, et très utile.</string>
+    <string name="title_intro2">Les permissions</string>
+    <string name="desc_intro2">Veuillez accoder les permissions nécéssaires pour pouvoir détecter le changement de cartes SIM.</string>
+    <string name="title_intro3">Numéro de sécurité</string>
+    <string name="desc_intro3">Ce numéro est utile pour que l\'application puisse vous contacter en cas de changement de SIM.</string>
+    <string name="title_intro4">Masquer l\'application</string>
+    <string name="desc_intro4">Pour plus de discrétion, vous pouvez masquer l\'application et désigner dans les paramètres une méthode pour la lancer.</string>
+
+    <!--
+    La sécurité
+    -->
+
+    <string name="vos_points_sont">Vos points sont à</string>
+    <string name="new_sim_to_whitelist">Nouvelle sim : \n Ajouter les à la liste blanche ?</string>
+
+    <string name="security_code">Code d\'accès</string>
+    <string name="new_security_code">Nouveau code d\'accès</string>
+    <string name="confirm_security_code">Confirmer le code d\'accès</string>
+    <string name="error_confirmation_security_code">Les deux codes d\'accès saisis ne sont pas identiques</string>
+    <string name="error_incorrect_security_code">Le code d\'accès saisi n\'est pas correct</string>
+
+    <string name="actions_necessaires">Actions necessaires</string>
+
+    <string name="permissions">Permissions</string>
+    <string name="permissions_notdone">Vous devez accordé les permissions nécessaires</string>
+    <string name="security_num_notdone">Vous deves configuré un numéro de sécurité</string>
+    <string name="appisshowed">Secure apparait dans la liste des applications</string>
+
+    <!--
+    Les paramètres
+    -->
+    <string name="settings">Paramètres</string>
+    <string name="theme">Thème</string>
+    <string name="dark_theme">Thème sombre</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_desc">Vous notifier lors de l\'epuisement de vos points</string>
+    <string name="hide_app">Masquer d\'application</string>
+    <string name="hide_desc">Masquer/Afficher l\'application de la liste des applications</string>
+    <string name="security_num">Numéro de sécurité</string>
+    <string name="security_num_desc">Ce numéro sera contacté automatiquement par sms en cas de changement de SIM non reconnus</string>
+    <string name="whitelist">Liste blanche</string>
+    <string name="whitelist_desc">Liste des cartes sim autorisés</string>
+    <string name="security_code_desc">Modifier votre code d\'accès</string>
+    <string name="start_interface">Interface de démarrage</string>
+    <string name="feedback">Feedback</string>
+    <string name="about">Â propos de l\'application</string>
+
+    <!--
+    Les paramètres 2
+    -->
+    <string name="name_phonenumber">Saisir un nom/numéro de téléphone</string>
+    <string name="serialnumber">Saisir le numéro de série</string>
+    <string name="hideAppHelp">Cette fonctionnalité vous permet de masquer l\'icon de la liste des applications, et pour la lancer il vous suffit de l\'activer et de faire un appel à un numéro de lancement qui est nécéssaire.</string>
+    <string name="luancher_num">Numéro de lancement</string>
+    <string name="nothing_num">Aucun numéro n\'a été ajouter</string>
+    <string name="add_phonenumber">Ajouter un numéro de téléphone</string>
+    <string name="securityNumHelp">Ce numéro sera utile pour pouvoir vous envoyer un sms automatiquement en cas de detection de changement d\'une nouvelle carte sim non reconnue</string>
+    <string name="empty_list">La liste est vide</string>
+
+    <!--
+    Les buttons
+    -->
+    <string name="skip">Passer</string>
+    <string name="back">Retour</string>
+    <string name="prev">Précédent</string>
+    <string name="next">Suivant</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Annuler</string>
+    <string name="enabled">Activer</string>
+    <string name="disabled">Désactiver</string>
+    <string name="add">Ajouter</string>
+    <string name="edit">Modifier</string>
+    <string name="valid">Valider</string>
+
+    <!--
+    Le message
+    -->
+    <string name="sms1">Nouvelle sim:</string>
+    <string name="sms2">Sim</string>
+    <string name="sms3">Device :</string>
+    <string name="endSms">Secure à votre service</string>
+
+    <string name="addedwhitelist">Ajouter à la liste blanche</string>
+
+    <!--
+    Le Store
+    -->
+    <string name="store">Magasin</string>
+    <string name="etatSolde">Votre solde de points est:</string>
+    <string name="days">jours</string>
+    <string name="info_points_store">La sécurité vous coûte 10 points par jour, pensez toujours à vérifier votre solde de points.</string>
+    <string name="show_video">Voir une vidéo</string>
+    <string name="soldenegative">Votre solde de points est négative pour l\'activer</string>
+
 </resources>

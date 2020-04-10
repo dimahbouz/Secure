@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-public class sharedManager {
+public class SharedManager {
     Context context;
     SharedPreferences prefs;
     Editor editor;
 
-    public sharedManager(Context context, String pref) {
+    public SharedManager(Context context, String pref) {
         this.context = context;
         this.prefs = context.getSharedPreferences(pref, 0);
         this.editor = this.prefs.edit();

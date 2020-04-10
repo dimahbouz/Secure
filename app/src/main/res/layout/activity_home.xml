@@ -1,237 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".HomeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".HomeActivity">
 
     <com.google.android.flexbox.FlexboxLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:justifyContent="space_between"
-        app:alignItems="center"
-        android:padding="10dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageButton
-            android:id="@+id/btnshare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_share_white_36dp"
-            android:background="@color/transparent"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/colorPrimary"
-            android:textSize="28dp"
-            android:textStyle="bold"/>
-
-        <ImageButton
-            android:id="@+id/btnsettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_settings_white_36dp"
-            android:background="@color/transparent"/>
-
-    </com.google.android.flexbox.FlexboxLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        tools:ignore="MissingConstraints"
-        android:orientation="vertical">
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:padding="20dp"
-            android:background="@color/colorGreen" >
+            android:padding="10dp"
+            app:alignItems="center"
+            app:justifyContent="space_between"
+            tools:ignore="MissingConstraints">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_verified_user_white_36dp" />
+                android:id="@+id/btnshare"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/share" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/enabled"
+                android:layout_gravity="center"
+                android:text="@string/app_name"
                 android:textColor="@color/colorPrimary"
-                android:textSize="36dp"
-                android:textStyle="bold"
-                android:gravity="center_vertical" />
+                android:textSize="@dimen/size24"
+                android:textStyle="bold" />
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/btnsettings"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/settings" />
 
-        <TextView
+        </com.google.android.flexbox.FlexboxLayout>
+
+    <ScrollView
+        android:id="@+id/homeScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="80dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="5dp"
-            android:text="You have 7 secured days"
-            android:textColor="@color/colorPrimary" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@color/colorGrey2"
-            android:layout_marginVertical="2dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_verified_user_white_36dp"
-                android:padding="20dp" />
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size16"
+                android:background="@color/colorBlue"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/enablelayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Permissions"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical" />
-                <TextView
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/imgenable"
+                        android:layout_width="50sp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/close" />
+
+                    <TextView
+                        android:id="@+id/txtenable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/size16"
+                        android:text="@string/disabled"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="36dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Permissions"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_enable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size8"
+                        android:background="@color/colorGreen"
+                        android:text="Activer" />
+
+                    <Button
+                        android:id="@+id/btn_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/size8"
+                        android:background="@color/colorBlue1"
+                        android:text="@string/store" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- NEWSIMBOX -->
+            <LinearLayout
+                android:id="@+id/newSimBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/size16"
+                android:layout_marginTop="@dimen/size16"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newSimListView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/colorRed"
+                    android:isScrollContainer="false">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <!-- ACTIONS NECESSAIRES -->
+            <LinearLayout
+                android:id="@+id/actions_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/size8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size8"
+                    android:text="@string/actions_necessaires"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18dp"
-                    android:gravity="center_vertical" />
+                    android:textSize="@dimen/size16"
+                    android:textStyle="bold"></TextView>
+
+                <LinearLayout
+                    android:id="@+id/btnpermissions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size8"
+                    android:background="@color/colorRed"
+                    android:gravity="left|center"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/size8">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/permissions"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/size22"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/permissions_notdone"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/size16" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_security_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size8"
+                    android:background="@color/colorRed"
+                    android:gravity="left|center"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/size8">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/security_num"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/size22"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/security_num_notdone"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/size16" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnhideapp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/size8"
+                    android:background="@color/colorRed"
+                    android:gravity="left|center"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:padding="@dimen/size8"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/appisshowed"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/size16" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@color/colorGrey2"
-            android:layout_marginVertical="2dp">
+    </ScrollView>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_verified_user_white_36dp"
-                android:padding="20dp" />
+    <!-- ADVIEW -->
+    <FrameLayout
+        android:id="@+id/ad_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Masque d'application"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Votre application est apparente"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18dp"
-                    android:gravity="center_vertical" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@color/colorGrey2"
-            android:layout_marginVertical="2dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_verified_user_white_36dp"
-                android:padding="20dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Numero de securite"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Votre numero est configure"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18dp"
-                    android:gravity="center_vertical" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@color/colorGrey2"
-            android:layout_marginVertical="2dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_verified_user_white_36dp"
-                android:padding="20dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Liste blanche"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Vous avez 3 numeros dans votre liste"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18dp"
-                    android:gravity="center_vertical" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

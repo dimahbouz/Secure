@@ -5,27 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.uccendigital.secure.app.sharedManager;
+import com.uccendigital.secure.app.App;
+import com.uccendigital.secure.app.SharedManager;
 
 public class MainActivity extends AppCompatActivity {
-
-    sharedManager AppShared;
-    Intent i;
+    SharedManager AppShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppShared = new sharedManager(this, "app");
+        AppShared = new SharedManager(this, "app");
 
         final String tuto = AppShared.getStr("tuto");
-        final String security = AppShared.getStr("security");
 
+        new App(getApplicationContext()).checkUpdate();
 
         new CountDownTimer(3000, 1000) {
 
@@ -36,20 +32,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
 
+                Intent i;
                 if (tuto.equals("") || tuto.equals("notdone")) {
                     i = new Intent(MainActivity.this, TutoActivity.class);
-                }else if (security.equals("") || security.equals("notdone")) {
+                } else {
                     i = new Intent(MainActivity.this, LockActivity.class);
-                    i.putExtra("ACTION",0); // Create new security code.
-                }else {
-                    i = new Intent(MainActivity.this, LockActivity.class);
-                    i.putExtra("ACTION",1); // Security code exist
                     i.putExtra("CHANGE", false);
                 }
-                MainActivity.this.startActivity(i);
-                MainActivity.this.finish();
+                startActivity(i);
+                finish();
             }
         }.start();
 
     }
+
 }
