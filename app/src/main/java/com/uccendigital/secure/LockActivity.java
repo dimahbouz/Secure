@@ -14,21 +14,21 @@ import android.widget.Toast;
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
+import com.uccendigital.secure.app.Functions;
 import com.uccendigital.secure.app.Hadher;
 import com.uccendigital.secure.app.SharedManager;
-import com.uccendigital.secure.services.StoreService;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class LockActivity extends AppCompatActivity {
 
     SharedManager AppShared, hadShared;
     Hadher hadher;
     int action;
-    Boolean change;
-    private IndicatorDots mIndicatorDots1, mIndicatorDots2, mIndicatorDots3;
-    private PinLockView mPinLockView1, mPinLockView2, mPinLockView3;
-    LinearLayout LLCode1, LLCode2, LLCode3;
+    Boolean change, check = false;
+    private IndicatorDots mIndicatorDots1;
+    private PinLockView mPinLockView1;
+    LinearLayout lockBtnBack;
     TextView lockactivityTitle;
     String Code1;
 
@@ -36,115 +36,100 @@ public class LockActivity extends AppCompatActivity {
         @SuppressLint("WrongConstant")
         public void onComplete(String code) {
 
-            /*
-            // Saisi d'un nouveau code d'acces
-             */
-
-            Code1 = code;
-
-            lockactivityTitle.setText(R.string.confirm_security_code);
-            LLCode1.setVisibility(View.GONE);
-            LLCode2.setVisibility(View.VISIBLE);
-            LLCode3.setVisibility(View.GONE);
-
-        }
-
-        public void onEmpty() {
-        }
-
-        public void onPinChange(int pinLength, String intermediatePin) {
-        }
-    };
-
-    private PinLockListener mPinLockListener2 = new PinLockListener() {
-        @SuppressLint("WrongConstant")
-        public void onComplete(String code) {
-
-            /*
-            // Confirmation de nouveau code d'acces saisi
-             */
-
-            /*
-            // Ajouter un button retour pour pouvoir modifier le nouveau code saisi avant de le confirmer
-             */
-
-            if (Code1.equals(code)) {
-
-                hadher = new Hadher(getApplicationContext());
-                hadher.putIffer("iffer", Code1);
-                hadher.putPoints(70);
-
-                Date date = new Date();
-                int now = (int) date.getTime();
-                AppShared.putInt("fs",now);
+            if (action == 0 && !check) {
 
                 /*
-                Toast.makeText(LockActivity.this, "Lanch StoreService from LockActivity ... ", Toast.LENGTH_SHORT).show();
-                Intent storeintent = new Intent(getApplicationContext(), StoreService.class);
-                startService(storeintent);
-
+                // Saisi d'un nouveau code d'acces
                  */
 
-                AppShared.putStr("security", "done");
-                AppShared.putbool("enable", false);
+                Code1 = code;
 
-                if (change) {
-                    finish();
-                } else {
-                    Intent i = new Intent(LockActivity.this, HomeActivity.class);
-                    startActivity(i);
-                    finish();
-                }
+                lockactivityTitle.setText(R.string.confirm_security_code);
 
-            }else Toast.makeText(LockActivity.this, getResources().getString(R.string.error_confirmation_security_code), Toast.LENGTH_SHORT).show();
-        }
+                lockBtnBack.setVisibility(View.VISIBLE);
+                mPinLockView1.resetPinLockView();
+                check = true;
 
-        public void onEmpty() {
-        }
+            } else if (action == 0 && check) {
 
-        public void onPinChange(int pinLength, String intermediatePin) {
-        }
-    };
+                /*
+                // Confirmation de nouveau code d'acces saisi
+                 */
 
-    private PinLockListener mPinLockListener3 = new PinLockListener() {
-        @SuppressLint("WrongConstant")
-        public void onComplete(String code) {
+                /*
+                // Ajouter un button retour pour pouvoir modifier le nouveau code saisi avant de le confirmer
+                 */
 
-            /*
-            // Verification de code d'acces
-             */
+                if (Code1.equals(code)) {
 
-            /*
-            // Ajouter un button OK pour pouvoir passer à home (Ne pas passer directement apres la saisi de tout le code)
-             */
+                    hadher = new Hadher(getApplicationContext());
+                    hadher.putIffer("iffer", Code1);
 
-            Intent i;
-            String iffer = new Hadher(getApplicationContext()).extractIffer("iffer");
+                    if (change) {
+                        finish();
+                    } else {
 
-            if (code.equals(iffer)) {
-                if (action == 1 && change) {
-                    /*
-                    // Action == 1 && change == true
-                    // Verification pour modification de code d'accée
-                     */
+                        AppShared.putLong("last",System.currentTimeMillis());
+                        hadher.putPoints(70);
+
+                        long now = System.currentTimeMillis();
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(now);
+                        int minutes = calendar.get(Calendar.MINUTE);
+                        AppShared.putInt("minute",minutes);
+                        AppShared.putLong("fs", now);
+
+                        new Functions(getApplicationContext()).setStoreManager(0);
+
+                        AppShared.putStr("security", "done");
+                        AppShared.putbool("enable", false);
+
+                        Intent i = new Intent(LockActivity.this, HomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+                }else Toast.makeText(LockActivity.this, getResources().getString(R.string.error_confirmation_security_code), Toast.LENGTH_SHORT).show();
+            } else if (action == 1) {
+
+                /*
+                // Verification de code d'acces
+                 */
+
+                /*
+                // Ajouter un button OK pour pouvoir passer à home (Ne pas passer directement apres la saisi de tout le code)
+                 */
+
+                Intent i;
+                String iffer = new Hadher(getApplicationContext()).extractIffer("iffer");
+
+                if (code.equals(iffer)) {
+                    if (action == 1 && change) {
+                        /*
+                        // Action == 1 && change == true
+                        // Verification pour modification de code d'accée
+                         */
 
 
-                    lockactivityTitle.setText(R.string.new_security_code);
-                    LLCode1.setVisibility(View.VISIBLE);
-                    LLCode2.setVisibility(View.GONE);
-                    LLCode3.setVisibility(View.GONE);
+                        lockactivityTitle.setText(R.string.new_security_code);
+                        mPinLockView1.resetPinLockView();
+                        action = 0;
+                        check = false;
 
-                }else {
-                    /*
-                    // Action == 1 && Change == false
-                    // Verification pour accéder a home
-                     */
+                    }else if (action == 1 && !change){
+                        /*
+                        // Action == 1 && Change == false
+                        // Verification pour accéder a home
+                         */
 
-                    i = new Intent(LockActivity.this, HomeActivity.class);
-                    LockActivity.this.startActivity(i);
-                    finish();
-                }
-            }else Toast.makeText(LockActivity.this, getResources().getString(R.string.error_incorrect_security_code), 0).show();
+                        i = new Intent(LockActivity.this, HomeActivity.class);
+                        LockActivity.this.startActivity(i);
+                        finish();
+                    }
+                }else Toast.makeText(LockActivity.this, getResources().getString(R.string.error_incorrect_security_code), 0).show();
+
+            }
+
 
         }
 
@@ -161,9 +146,7 @@ public class LockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
 
-        LLCode1 = findViewById(R.id.code1);
-        LLCode2 = findViewById(R.id.code2);
-        LLCode3 = findViewById(R.id.code3);
+        lockBtnBack = findViewById(R.id.lockBtnBack);
 
         hadher = new Hadher(getApplicationContext());
 
@@ -185,7 +168,6 @@ public class LockActivity extends AppCompatActivity {
             //  Change == true => Vérification de code d'accée pour pouvoir le modifier
              */
 
-
         AppShared = new SharedManager(this, "app");
         hadShared = new SharedManager(this, "hadher");
 
@@ -194,18 +176,28 @@ public class LockActivity extends AppCompatActivity {
         if (action == 0) {
             lockactivityTitle.setText(R.string.new_security_code);
 
-            LLCode1.setVisibility(View.VISIBLE);
-            LLCode2.setVisibility(View.GONE);
-            LLCode3.setVisibility(View.GONE);
-
         }else if (action == 1){
             lockactivityTitle.setText(R.string.security_code);
 
-            LLCode1.setVisibility(View.GONE);
-            LLCode2.setVisibility(View.GONE);
-            LLCode3.setVisibility(View.VISIBLE);
         } else {
             finish();
+        }
+
+        if (action == 0 || (action == 1 && change)) {
+
+            lockBtnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    lockactivityTitle.setText(R.string.new_security_code);
+
+                    lockBtnBack.setVisibility(View.INVISIBLE);
+                    mPinLockView1.resetPinLockView();
+                    check = false;
+
+                }
+            });
+
         }
 
         this.mPinLockView1 = findViewById(R.id.pin_lock_view1);
@@ -214,24 +206,11 @@ public class LockActivity extends AppCompatActivity {
         this.mPinLockView1.setPinLockListener(this.mPinLockListener1);
         this.mPinLockView1.setPinLength(5);
         this.mPinLockView1.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        this.mIndicatorDots1.setIndicatorType(2);
-
-        this.mPinLockView2 = findViewById(R.id.pin_lock_view2);
-        this.mIndicatorDots2 = findViewById(R.id.indicator_dots2);
-        this.mPinLockView2.attachIndicatorDots(this.mIndicatorDots2);
-        this.mPinLockView2.setPinLockListener(this.mPinLockListener2);
-        this.mPinLockView2.setPinLength(5);
-        this.mPinLockView2.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        this.mIndicatorDots2.setIndicatorType(2);
-
-        this.mPinLockView3 = findViewById(R.id.pin_lock_view3);
-        this.mIndicatorDots3 = findViewById(R.id.indicator_dots3);
-        this.mPinLockView3.attachIndicatorDots(this.mIndicatorDots3);
-        this.mPinLockView3.setPinLockListener(this.mPinLockListener3);
-        this.mPinLockView3.setPinLength(5);
-        this.mPinLockView3.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        this.mIndicatorDots3.setIndicatorType(2);
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

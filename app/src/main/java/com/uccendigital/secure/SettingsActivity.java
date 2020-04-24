@@ -3,6 +3,7 @@ package com.uccendigital.secure;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -118,6 +119,27 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout feedback = findViewById(R.id.feedback);
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                composeEmail(new String[] {"uccen2019@gmail.com"}, getResources().getString(R.string.app_name) + " feedback");
+            }
+        });
+
+        LinearLayout about = findViewById(R.id.about);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Settings2Activity.class);
+                i.putExtra("PAGE", "about");
+                i.putExtra("title", getResources().getString(R.string.about));
+                startActivity(i);
+            }
+        });
+
+
+
     }
 
     private void checkSection(String section) {
@@ -128,5 +150,20 @@ public class SettingsActivity extends AppCompatActivity {
             hideapp.setBackgroundColor(getResources().getColor(R.color.colorAccent,getTheme()));
         }
 
+    }
+
+    public void composeEmail(String[] addresses, String subject) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

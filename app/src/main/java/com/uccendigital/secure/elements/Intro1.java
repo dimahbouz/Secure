@@ -16,7 +16,7 @@ import com.uccendigital.secure.R;
 public class Intro1 extends Fragment {
 
     ViewPager viewPager;
-    TextView btnnext;
+    TextView btnnext, lanchTest;
 
     public Intro1() {
         // Required empty public constructor
@@ -30,6 +30,8 @@ public class Intro1 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_intro1, container, false);
         viewPager = getActivity().findViewById(R.id.viewpager);
         btnnext = view.findViewById(R.id.btnnext);
+        lanchTest = view.findViewById(R.id.lanchTest);
+
 
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override

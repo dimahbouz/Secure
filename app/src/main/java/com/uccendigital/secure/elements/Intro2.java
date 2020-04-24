@@ -53,6 +53,7 @@ public class Intro2 extends Fragment {
             }
         });
 
+        /*
         btnperm = view.findViewById(R.id.getPerms);
 
         app = new App(getContext());
@@ -61,10 +62,11 @@ public class Intro2 extends Fragment {
             @Override
             public void onClick(View v) {
 
-                app.checkPermissions(new String[] {"android.permission.READ_PHONE_STATE", "android.permission.SEND_SMS"});
+                app.checkPermissions(new String[] {Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS});
 
             }
         });
+         */
 
         return view;
     }
@@ -73,11 +75,14 @@ public class Intro2 extends Fragment {
     public void onResume() {
         super.onResume();
 
+        /*
         if (!app.checkPerm(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS})) {
             btnperm.setVisibility(View.VISIBLE);
         } else {
             btnperm.setVisibility(View.GONE);
         }
+
+         */
 
     }
 }

@@ -61,9 +61,9 @@ public class MyRVAdapter extends RecyclerView.Adapter<MyRVAdapter.ViewHolder> {
 
 
                     if (options[0].equals("delete")) {
-                        holder.listoptions.setImageResource(R.drawable.close);
+                        holder.listoptions.setImageResource(R.drawable.ic_delete);
                     } else if (options[0].equals("add")) {
-                        holder.listoptions.setImageResource(R.drawable.add);
+                        holder.listoptions.setImageResource(R.drawable.ic_add);
                     }
 
                     holder.listoptions.setOnClickListener(new View.OnClickListener() {

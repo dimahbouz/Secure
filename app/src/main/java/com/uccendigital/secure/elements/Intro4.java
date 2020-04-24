@@ -44,27 +44,12 @@ public class Intro4 extends Fragment {
             }
         });
 
-        btnnext = view.findViewById(R.id.btnok);
+        btnnext = view.findViewById(R.id.btnnext);
 
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SharedManager AppShared = new SharedManager(getContext(), "app");
-                String tuto = AppShared.getStr("tuto");
-                AppShared.putStr("tuto", "done");
-
-                if (tuto.equals("notdone")) {
-                    getActivity().finish();
-                } else {
-
-                    Intent intent = new Intent(getContext(), LockActivity.class);
-                    intent.putExtra("CHANGE", false);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-
-                }
-
+                viewPager.setCurrentItem(4);
             }
         });
 

@@ -2,44 +2,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.uccendigital.secure">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/DarkTheme">
-        <service
-            android:name=".services.StoreService"
-            android:enabled="true"
-            android:exported="false"></service>
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5270518524503567~9086476085" />
+            android:value="ca-app-pub-2264850049980959~7850780416" />
 
         <receiver
-            android:name=".services.BootCompleted"
+            android:name=".services.StoreReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="false"></receiver>
+        <receiver
+            android:name=".services.BootCompleted"
+            android:directBootAware="true"
+            android:exported="true"
+            android:enabled="true">
             <intent-filter>
+
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.REBOOT"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
         </receiver>
-        <receiver
-            android:name=".services.SimChanged"
-            android:enabled="true"
-            android:exported="true">
+        <receiver android:name=".services.SimChanged">
             <intent-filter>
                 <action android:name="android.intent.action.SIM_STATE_CHANGED" />
             </intent-filter>
@@ -50,22 +51,16 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:excludeFromRecents="true"
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-.
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Settings2Activity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".Test">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".TutoActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".LockActivity" />

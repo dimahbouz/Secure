@@ -4,26 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uccendigital.secure.adapters.MyRVAdapter;
-import com.uccendigital.secure.adapters.MySimAdapter;
 import com.uccendigital.secure.app.App;
 import com.uccendigital.secure.app.Functions;
 import com.uccendigital.secure.app.Hadher;
 import com.uccendigital.secure.app.SharedManager;
 import com.uccendigital.secure.elements.Sim;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,8 @@ public class Settings2Activity extends AppCompatActivity {
     Hadher hadher;
     App app;
 
-    LinearLayout addWhitelistBox, hideAppBox, numberBox, numberEditor;
+    String PAGE, title;
+    LinearLayout addWhitelistBox, hideAppBox, numberBox, numberEditor, linearHelp;
     Switch hideAppSwitch;
     TextView titlesettings2, whitelistAddBtn, whitelistCancel, whitelistAdd, securityNumHelp, numberInt, editNumber, cancelNumberEditText, validNumberEditText;
     EditText whitelistAddName, whitelistAddSerial, numberEditText;
@@ -50,14 +51,18 @@ public class Settings2Activity extends AppCompatActivity {
         app = new App(getApplicationContext());
         hadher = new Hadher(getApplicationContext());
 
-        String PAGE = getIntent().getExtras().getString("PAGE");
-        String title = getIntent().getExtras().getString("title");
+        PAGE = getIntent().getExtras().getString("PAGE");
+        title = getIntent().getExtras().getString("title");
 
         titlesettings2 = findViewById(R.id.title_settings2);
         titlesettings2.setText(title);
 
-        setViewTo(PAGE);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setViewTo(PAGE);
     }
 
     private void setViewTo (String view) {
@@ -95,6 +100,10 @@ public class Settings2Activity extends AppCompatActivity {
             hideAppBox = findViewById(R.id.hideAppBox);
             hideAppBox.setVisibility(View.VISIBLE);
 
+        } else if (view.equals("about")) {
+
+            linearHelp = findViewById(R.id.linearHelp);
+            linearHelp.setVisibility(View.VISIBLE);
         }
 
     }
@@ -145,6 +154,7 @@ public class Settings2Activity extends AppCompatActivity {
         whitelistCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKeyboard();
                 whitelistAddBox.setVisibility(View.GONE);
                 whitelistAddBtn.setVisibility(View.VISIBLE);
                 whitelistAddName.setText("");
@@ -165,6 +175,7 @@ public class Settings2Activity extends AppCompatActivity {
                     simList.add(new Sim(name, serial));
                     showList(simList);
 
+                    hideKeyboard();
                     whitelistAddBox.setVisibility(View.GONE);
                     whitelistAddBtn.setVisibility(View.VISIBLE);
                     whitelistAddName.setText("");
@@ -216,15 +227,23 @@ public class Settings2Activity extends AppCompatActivity {
 
         hideAppSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                AppShared.putbool("hide_app", isChecked);
 
                 if (isChecked) {
-                    numberBox.setVisibility(View.VISIBLE);
 
-                    if (!num.equals("")) {
-                        app.hideApp(true);
+                    if (app.checkPerm(new String[] {Manifest.permission.READ_PHONE_STATE})) {
+
+                        numberBox.setVisibility(View.VISIBLE);
+
+                        if (!num.equals("")) {
+                            AppShared.putbool("hide_app", isChecked);
+                            app.hideApp(true);
+                        }
+                    } else {
+                        hideAppSwitch.setChecked(!isChecked);
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.permissions_notdone), Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    AppShared.putbool("hide_app", isChecked);
                     numberBox.setVisibility(View.GONE);
                     app.hideApp(false);
                 }
@@ -271,6 +290,7 @@ public class Settings2Activity extends AppCompatActivity {
                     numberEditText.setText(num);
                 }
 
+                hideKeyboard();
                 numberEditor.setVisibility(View.GONE);
                 editNumber.setVisibility(View.VISIBLE);
             }
@@ -285,6 +305,7 @@ public class Settings2Activity extends AppCompatActivity {
                     hadher.putIffer("assiwel",newNum);
                 } else if (addTo.equals("security_num")) {
                     hadher.putIffer("achegue3",newNum);
+                    if (newNum.equals("")) AppShared.putbool("enable", false);
                 }
 
                 numberInt.setText(newNum);
@@ -292,13 +313,33 @@ public class Settings2Activity extends AppCompatActivity {
                 editNumber.setText(getResources().getString(R.string.edit));
 
                 if (addTo.equals("luancher_num")) {
-                    app.hideApp(true);
+                    if (!newNum.equals("")) {
+                        app.hideApp(true);
+                    } else app.hideApp(false);
                 }
+                hideKeyboard();
                 numberEditor.setVisibility(View.GONE);
                 editNumber.setVisibility(View.VISIBLE);
 
             }
         });
 
+    }
+
+    private void hideKeyboard() {
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

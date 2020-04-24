@@ -8,266 +8,340 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <com.google.android.flexbox.FlexboxLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            app:alignItems="center"
-            app:justifyContent="space_between"
-            tools:ignore="MissingConstraints">
-
-            <ImageView
-                android:id="@+id/btnshare"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:src="@drawable/share" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/size24"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/btnsettings"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:src="@drawable/settings" />
-
-        </com.google.android.flexbox.FlexboxLayout>
-
-    <ScrollView
-        android:id="@+id/homeScrollView"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="80dp"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"
+        ></ImageView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        android:gravity="start">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/titleLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <com.google.android.flexbox.FlexboxLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/size16"
-                android:background="@color/colorBlue"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:padding="10dp"
+                app:alignItems="center"
+                app:justifyContent="space_between"
+                tools:ignore="MissingConstraints">
 
-                <LinearLayout
-                    android:id="@+id/enablelayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="20dp">
-
-                    <ImageView
-                        android:id="@+id/imgenable"
-                        android:layout_width="50sp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/close" />
-
-                    <TextView
-                        android:id="@+id/txtenable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="@dimen/size16"
-                        android:text="@string/disabled"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="36dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btn_enable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/size8"
-                        android:background="@color/colorGreen"
-                        android:text="Activer" />
-
-                    <Button
-                        android:id="@+id/btn_video"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/size8"
-                        android:background="@color/colorBlue1"
-                        android:text="@string/store" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- NEWSIMBOX -->
-            <LinearLayout
-                android:id="@+id/newSimBox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/size16"
-                android:layout_marginTop="@dimen/size16"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/newSimListView"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="@color/colorRed"
-                    android:isScrollContainer="false">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-            </LinearLayout>
-
-            <!-- ACTIONS NECESSAIRES -->
-            <LinearLayout
-                android:id="@+id/actions_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/size8">
+                <ImageView
+                    android:id="@+id/btnshare"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:src="@drawable/ic_share" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/size8"
-                    android:text="@string/actions_necessaires"
+                    android:layout_gravity="center"
+                    android:text="@string/app_name"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/size16"
-                    android:textStyle="bold"></TextView>
+                    android:textSize="@dimen/size24"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btnsettings"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:src="@drawable/ic_settings" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height ="0dp"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_below="@+id/titleLayout"
+            android:layout_above="@+id/ad_view_container">
+                
+            <ScrollView
+                android:id="@+id/homeScrollView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
 
                 <LinearLayout
-                    android:id="@+id/btnpermissions"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/size8"
-                    android:background="@color/colorRed"
-                    android:gravity="left|center"
-                    android:orientation="horizontal"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     tools:ignore="MissingConstraints">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorBlue"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/enablelayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorAccent"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/txtenable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="@dimen/size16"
+                                android:text="@string/disabled"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="36dp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/roundedark"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/size16"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_enable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/size16"
+                            android:background="@color/colorGreen"
+                            android:text="Activer" />
+
+                        <Button
+                            android:id="@+id/btn_video"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/size16"
+                            android:background="@color/colorBlue1"
+                            android:text="@string/store" />
+
+                    </LinearLayout>
+
+                    <!-- NEWSIMBOX -->
+                    <LinearLayout
+                        android:id="@+id/newSimBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size16"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/newSimListView"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@color/colorRed"
+                            android:isScrollContainer="false">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+                    </LinearLayout>
+
+                    <!-- ACTIONS NECESSAIRES -->
+                    <LinearLayout
+                        android:id="@+id/actions_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="@dimen/size8">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/btnpermissions"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/size8"
+                            android:background="@drawable/roundered"
+                            android:orientation="horizontal"
                             android:gravity="center_vertical"
-                            android:text="@string/permissions"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/size22"
-                            android:textStyle="bold" />
+                            android:weightSum="7"
+                            tools:ignore="MissingConstraints">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="6"
+                                android:padding="@dimen/size8">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/permissions"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/size22"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/permdescription"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/permissions_notdone"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/size16" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/permsChecked"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/size8"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/ic_check"
+                                android:visibility="gone"></ImageView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btn_security_num"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/size8"
+                            android:background="@drawable/roundered"
+                            android:orientation="horizontal"
                             android:gravity="center_vertical"
-                            android:text="@string/permissions_notdone"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/size16" />
+                            android:weightSum="7"
+                            tools:ignore="MissingConstraints">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="6"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/size8">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/security_num"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/size22"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/numberdescription"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/security_num_notdone"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/size16" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/numberChecked"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/size8"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/ic_check"
+                                android:visibility="gone"></ImageView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnhideapp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/roundered"
+                            android:layout_margin="@dimen/size8"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            tools:ignore="MissingConstraints"
+                            android:weightSum="7">
+
+                            <ImageView
+                                android:id="@+id/hideappIcon"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="60sp"
+                                android:adjustViewBounds="true"
+                                android:background="@color/transparent"
+                                android:padding="@dimen/size8"
+                                android:src="@mipmap/ic_launcher" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="5"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/size8">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/hide_app"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/size22"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/hideappdesc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/hideapp_notdone"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="@dimen/size16" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/hideAppChecked"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="60sp"
+                                android:padding="@dimen/size8"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/ic_check"
+                                android:visibility="gone"></ImageView>
+
+                        </LinearLayout>
 
                     </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btn_security_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/size8"
-                    android:background="@color/colorRed"
-                    android:gravity="left|center"
-                    android:orientation="horizontal"
-                    tools:ignore="MissingConstraints">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/size8">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="@string/security_num"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/size22"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="@string/security_num_notdone"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/size16" />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/btnhideapp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/size8"
-                    android:background="@color/colorRed"
-                    android:gravity="left|center"
-                    android:orientation="horizontal"
-                    tools:ignore="MissingConstraints">
+            </ScrollView>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/transparent"
-                        android:padding="@dimen/size8"
-                        android:src="@mipmap/ic_launcher" />
+        </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:text="@string/appisshowed"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/size16" />
+        <!-- ADVIEW -->
+        <FrameLayout
+            android:id="@+id/ad_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true" />
 
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <!-- ADVIEW -->
-    <FrameLayout
-        android:id="@+id/ad_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true" />
-
+    </RelativeLayout>
 </RelativeLayout>

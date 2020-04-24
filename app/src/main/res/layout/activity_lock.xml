@@ -7,6 +7,12 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".LockActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"
+        ></ImageView>
     <LinearLayout
         android:id="@+id/LockContainer"
         android:layout_width="wrap_content"
@@ -32,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
-                android:src="@drawable/lock" />
+                android:src="@drawable/ic_lock" />
 
             <TextView
                 android:id="@+id/LockActivityTitle"
@@ -64,6 +70,9 @@
                     android:layout_gravity="center_horizontal"
                     app:dotDiameter="12dp"
                     app:dotSpacing="18dp"
+                    app:indicatorType="fixed"
+                    app:dotEmptyBackground="@drawable/dotsprimary"
+                    app:dotFilledBackground="@drawable/dotsaccent"
                     android:layout_marginVertical="10sp"/>
 
                 <com.andrognito.pinlockview.PinLockView
@@ -77,85 +86,59 @@
                     app:keypadVerticalSpacing="18dp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/code2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:visibility="gone">
-
-                <com.andrognito.pinlockview.IndicatorDots
-                    android:id="@+id/indicator_dots2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:dotDiameter="12dp"
-                    app:dotSpacing="18dp"
-                    android:layout_marginVertical="10sp"/>
-
-                <com.andrognito.pinlockview.PinLockView
-                    android:id="@+id/pin_lock_view2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    app:keypadButtonSize="64dp"
-                    app:keypadHorizontalSpacing="28dp"
-                    app:keypadTextSize="16dp"
-                    app:keypadVerticalSpacing="18dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/code3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:visibility="gone">
-
-                <com.andrognito.pinlockview.IndicatorDots
-                    android:id="@+id/indicator_dots3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:dotDiameter="12dp"
-                    app:dotSpacing="18dp"
-                    android:layout_marginVertical="10sp"/>
-
-                <com.andrognito.pinlockview.PinLockView
-                    android:id="@+id/pin_lock_view3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    app:keypadButtonSize="64dp"
-                    app:keypadHorizontalSpacing="28dp"
-                    app:keypadTextSize="16dp"
-                    app:keypadVerticalSpacing="18dp" />
-            </LinearLayout>
-
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
+    <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:paddingBottom="@dimen/size8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:flexDirection="column"
+        app:justifyContent="space_between">
 
-        <TextView
-            android:id="@+id/copyrightLockActivity"
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/lockBtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:padding="@dimen/size8">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"></ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/size16"
+                android:text="@string/back"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/copyright"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="italic" />
+            android:gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/copyrightLockActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/copyright"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="italic"
+                android:padding="@dimen/size8"
+                android:background="#99000000" />
+
+        </LinearLayout>
+    </com.google.android.flexbox.FlexboxLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

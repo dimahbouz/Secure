@@ -16,8 +16,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,13 +27,12 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.uccendigital.secure.adapters.Header;
 import com.uccendigital.secure.adapters.MyRVAdapter;
-import com.uccendigital.secure.app.Ads;
 import com.uccendigital.secure.app.App;
 import com.uccendigital.secure.app.Functions;
 import com.uccendigital.secure.app.Hadher;
 import com.uccendigital.secure.app.SharedManager;
 import com.uccendigital.secure.elements.Sim;
-import com.uccendigital.secure.elements.StoreDialog;
+import com.uccendigital.secure.elements.Dialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,16 +44,18 @@ public class HomeActivity extends AppCompatActivity {
     Hadher hadher;
     App app;
 
-    ImageView btnsettings, btnshare, imgenable;
-    LinearLayout enablelayout, btnpermissions, btnhideapp, btn_security_num, action_layout, newSimBox;
-    TextView txtenable;
+    ImageView btnsettings, btnshare;
+    LinearLayout enablelayout, btnpermissions, btnhideapp, btn_security_num, newSimBox;
+    TextView txtenable, permdescription, numberdescription, hideappdesc;
     Button btnenable, btnvideo;
     private FrameLayout adContainerView;
 
     boolean backButton = false, AppEnable;
     int idrimen;
 
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/9214589741";
+    // ca....111 -> TestAd
+    // ca-app-pub-3940256099942544/6300978111
+    private static final String AD_UNIT_ID = "ca-app-pub-2264850049980959/3365574645";
     private AdView adView;
 
     @Override
@@ -69,13 +68,16 @@ public class HomeActivity extends AppCompatActivity {
         AppShared = new SharedManager(getApplicationContext(), "app");
         hadShared = new SharedManager(getApplicationContext(), "hadher");
         hadher = new Hadher(getApplicationContext());
-        // ads = new Ads(getApplicationContext());
 
-        // Initialize the Mobile Ads SDK.
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
-          @Override
-          public void onInitializationComplete(InitializationStatus initializationStatus) {}
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {}
         });
+
+        if (!AppShared.getBool("help")) {
+            final Dialog dialog = new Dialog(getApplicationContext(), HomeActivity.this);
+            dialog.show("help");
+        }
 
     }
 
@@ -88,23 +90,16 @@ public class HomeActivity extends AppCompatActivity {
 
         Boolean perm = checkPerm();
         Boolean secnum = checkSecurityNum();
-        Boolean appico = checkAppIcon();
+        checkAppIcon();
 
         setupBTN();
 
         setupNewSIM();
 
-        if (checkPerm() && secnum) {
+        if (perm && secnum) {
             setEnable(AppEnable);
         } else {
             setEnable(false);
-        }
-
-        action_layout = findViewById(R.id.actions_layout);
-        if (perm && secnum && appico) {
-            action_layout.setVisibility(View.GONE);
-        } else {
-            action_layout.setVisibility(View.VISIBLE);
         }
 
         adContainerView = findViewById(R.id.ad_view_container);
@@ -145,11 +140,10 @@ public class HomeActivity extends AppCompatActivity {
         // Click in button to enable security in application if you have the points
          */
         btnenable = findViewById(R.id.btn_enable);
-        imgenable = findViewById(R.id.imgenable);
         txtenable = findViewById(R.id.txtenable);
         enablelayout = findViewById(R.id.enablelayout);
 
-        final StoreDialog storeDialog = new StoreDialog(getApplicationContext(), HomeActivity.this);
+        final Dialog dialog = new Dialog(getApplicationContext(), HomeActivity.this);
         btnenable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,14 +164,14 @@ public class HomeActivity extends AppCompatActivity {
                                 setEnable(false);
                             } else if (!AppEnable){
                                 if (idrimen <= 0) {
-                                    storeDialog.show();
+                                    dialog.show("dialog");
                                 } else {
                                     AppShared.putbool("enable",true);
                                     setEnable(true);
                                 }
                             }
                         } else {
-                            storeDialog.show();
+                            dialog.show("dialog");
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.soldenegative), Toast.LENGTH_SHORT).show();
                         }
                     } else Toast.makeText(getApplicationContext(), getResources().getString(R.string.security_num_notdone), Toast.LENGTH_SHORT).show();
@@ -189,7 +183,7 @@ public class HomeActivity extends AppCompatActivity {
         btnvideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                storeDialog.show();
+                dialog.show("dialog");
             }
         });
 
@@ -202,6 +196,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                 intent.putExtra("SECTION", "");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
 
             }
@@ -242,7 +237,7 @@ public class HomeActivity extends AppCompatActivity {
             }.start();
 
         } else if (backButton) {
-            finish();
+            finishAffinity();
         }
     }
 
@@ -250,13 +245,11 @@ public class HomeActivity extends AppCompatActivity {
 
         if (setEnable) {
             enablelayout.setBackgroundColor(getResources().getColor(R.color.colorBlue));
-            imgenable.setImageResource(R.drawable.checked);
             txtenable.setText(R.string.enabled);
             btnenable.setBackgroundColor(getResources().getColor(R.color.colorRed));
             btnenable.setText(R.string.disabled);
         } else {
             enablelayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            imgenable.setImageResource(R.drawable.close);
             txtenable.setText(R.string.disabled);
             btnenable.setBackgroundColor(getResources().getColor(R.color.colorGreen));
             btnenable.setText(R.string.enabled);
@@ -267,21 +260,28 @@ public class HomeActivity extends AppCompatActivity {
     private Boolean checkPerm() {
 
         btnpermissions = findViewById(R.id.btnpermissions);
-
-        btnpermissions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                app.checkPermissions(new String[] {"android.permission.READ_PHONE_STATE", "android.permission.SEND_SMS"});
-
-            }
-        });
+        permdescription = findViewById(R.id.permdescription);
+        ImageView permchecked = findViewById(R.id.permsChecked);
 
         if (!app.checkPerm(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS})) {
-            btnpermissions.setVisibility(View.VISIBLE);
+
+            btnpermissions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    app.checkPermissions(new String[] {Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS});
+
+                }
+            });
+
+            btnpermissions.setBackground(getDrawable(R.drawable.roundered));
+            permdescription.setText(getResources().getString(R.string.permissions_notdone));
+            permchecked.setVisibility(View.GONE);
             return false;
         } else {
-            btnpermissions.setVisibility(View.GONE);
+            btnpermissions.setBackground(getDrawable(R.drawable.roundedark));
+            permdescription.setText(getResources().getString(R.string.permissions_done));
+            permchecked.setVisibility(View.VISIBLE);
             return true;
         }
 
@@ -289,21 +289,28 @@ public class HomeActivity extends AppCompatActivity {
 
     private Boolean checkSecurityNum() {
         btn_security_num = findViewById(R.id.btn_security_num);
+        numberdescription = findViewById(R.id.numberdescription);
+        ImageView numberchecked = findViewById(R.id.numberChecked);
 
-        btn_security_num.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-                i.putExtra("SECTION", "security_num");
-                startActivity(i);
-            }
-        });
+        if (!hadher.checkIffer("achegue3") || hadher.extractIffer("achegue3").equals("")) {
 
-        if (!hadher.checkIffer("achegue3")) {
-            btn_security_num.setVisibility(View.VISIBLE);
+            btn_security_num.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+                    i.putExtra("SECTION", "security_num");
+                    startActivity(i);
+                }
+            });
+
+            btn_security_num.setBackground(getDrawable(R.drawable.roundered));
+            numberdescription.setText(getResources().getString(R.string.security_num_notdone));
+            numberchecked.setVisibility(View.GONE);
             return false;
         } else {
-            btn_security_num.setVisibility(View.GONE);
+            btn_security_num.setBackground(getDrawable(R.drawable.roundedark));
+            numberdescription.setText(getResources().getString(R.string.security_num_done));
+            numberchecked.setVisibility(View.VISIBLE);
             return true;
         }
 
@@ -311,22 +318,29 @@ public class HomeActivity extends AppCompatActivity {
 
     private Boolean checkAppIcon() {
         btnhideapp = findViewById(R.id.btnhideapp);
+        hideappdesc = findViewById(R.id.hideappdesc);
+        ImageView hideappchecked = findViewById(R.id.hideAppChecked);
 
-        btnhideapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-                i.putExtra("SECTION", "hide_app");
-                startActivity(i);
-            }
-        });
+        if (!AppShared.getBool("hide_app")) {
 
-        if (AppShared.getBool("hide_app")) {
-            btnhideapp.setVisibility(View.GONE);
-            return true;
-        } else {
-            btnhideapp.setVisibility(View.VISIBLE);
+            btnhideapp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+                    i.putExtra("SECTION", "hide_app");
+                    startActivity(i);
+                }
+            });
+
+            btnhideapp.setBackground(getDrawable(R.drawable.roundered));
+            hideappdesc.setText(getResources().getString(R.string.hideapp_notdone));
+            hideappchecked.setVisibility(View.GONE);
             return false;
+        } else {
+            btnhideapp.setBackground(getDrawable(R.drawable.roundedark));
+            hideappdesc.setText(getResources().getString(R.string.hideapp_done));
+            hideappchecked.setVisibility(View.VISIBLE);
+            return true;
         }
     }
 
@@ -356,6 +370,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // Start loading the ad in the background.
         adView.loadAd(adRequest);
+
     }
 
     private AdSize getAdWidth() {

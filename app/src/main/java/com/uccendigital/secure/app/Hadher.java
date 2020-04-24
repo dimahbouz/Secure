@@ -3,7 +3,6 @@ package com.uccendigital.secure.app;
 import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -23,17 +22,33 @@ public class Hadher {
         hadShared = new SharedManager(context, "hadher");
     }
 
-    public void putPoints(int inte) {
-        int idrimen = extractPoints() + inte;
+    public void sousPoints(int points, long last) {
+        int oldPoints = extractPoints();
+        int idrimen = 0;
+        if (points > oldPoints) {
+            idrimen = oldPoints;
+        } else idrimen = oldPoints - points;
+        new SharedManager(context, "app").putLong("last",last);
         putIffer("idrimen", String.valueOf(idrimen + 34));
-        Toast.makeText(context, "Points updated ... " + idrimen , Toast.LENGTH_LONG).show();
+    }
+
+    public void addPoints(int points) {
+        int idrimen = extractPoints() + points;
+        putIffer("idrimen", String.valueOf(idrimen + 34));
+    }
+
+    public void putPoints(int points) {
+        putIffer("idrimen", String.valueOf(points + 34));
     }
 
     public int extractPoints() {
         String adrim = extractIffer("idrimen");
-        int idrimen = 34;
-        if (!adrim.equals("")) idrimen = Integer.parseInt(adrim);
-        return idrimen-34;
+
+        if (!adrim.equals("")) {
+            return Integer.parseInt(adrim) - 34;
+        } else {
+            return 0;
+        }
 
     }
 

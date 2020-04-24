@@ -8,6 +8,12 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop"
+        ></ImageView>
     <LinearLayout
         android:id="@+id/startLayoutLogo"
         android:layout_width="wrap_content"
@@ -47,4 +53,18 @@
             android:text="@string/byuccendigital" />
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom|end"
+        android:padding="@dimen/size8">
+
+        <TextView
+            android:id="@+id/showVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/colorPrimary"></TextView>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

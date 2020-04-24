@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:alignItems="center"
+            app:justifyContent="space_between"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/btnshare"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/dialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/store"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/size24"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btnclose"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/ic_delete"/>
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <LinearLayout
+            android:id="@+id/linearHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/size16">
+
+                    <TextView
+                        android:id="@+id/textHelp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/helpContent"
+                        android:textColor="@color/colorPrimary"
+                        ></TextView>
+
+                    <CheckBox
+                        android:id="@+id/helpcheckbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dontshow"
+                        android:textColor="@color/colorPrimary"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="false"></CheckBox>
+
+                    <Button
+                        android:id="@+id/helpOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:textColor="@color/colorPrimary"
+                        android:background="@color/colorAccent"
+                        android:text="@string/ok"></Button>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="@dimen/size16">
+                <TextView
+                    android:id="@+id/etatStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/etatSolde"
+                    android:textSize="@dimen/size16"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <TextView
+                    android:id="@+id/pointsStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="@dimen/size48"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/showVideoBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGrey"
+                    android:padding="@dimen/size8"
+                    android:layout_margin="@dimen/size8"
+                    android:text="@string/show_video"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size8"
+                android:padding="@dimen/size8"
+                android:background="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
+                android:text="@string/info_points_store"></TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

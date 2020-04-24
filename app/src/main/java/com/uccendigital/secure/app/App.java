@@ -3,12 +3,13 @@ package com.uccendigital.secure.app;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.Settings;
 import android.telephony.SmsManager;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -32,8 +34,9 @@ import com.google.android.play.core.tasks.Task;
 import com.uccendigital.secure.LockActivity;
 import com.uccendigital.secure.MainActivity;
 import com.uccendigital.secure.R;
+import com.uccendigital.secure.elements.Sim;
 
-import java.util.UUID;
+import java.util.List;
 
 public class App extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST = 2398;
@@ -51,6 +54,7 @@ public class App extends AppCompatActivity {
         if (hide) {i = 2;}
         context.getPackageManager().setComponentEnabledSetting(new ComponentName(context, MainActivity.class), i, 1);
         AppShared.putbool("hide_app", hide);
+        
     }
 
     public boolean checkPerm(String[] permissions) {
@@ -194,11 +198,13 @@ public class App extends AppCompatActivity {
     public void SimpleNotify(int id, String subtext, String title, String text, Boolean red) {
 
         int notificationId = id;
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle = bigTextStyle.bigText(text);
 
         Builder notificationBuilder = new Builder(context).setDefaults(-1).setAutoCancel(true)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
-                .setSubText(subtext).setContentTitle(title).setContentText(text);
+                .setContentTitle(title).setContentText(text)
+                .setStyle(bigTextStyle);
 
         if (red) {
             Intent i = new Intent(context, LockActivity.class);
@@ -209,11 +215,73 @@ public class App extends AppCompatActivity {
         NotificationManagerCompat.from(context).notify(notificationId, notificationBuilder.build());
     }
 
-    @SuppressLint("MissingPermission")
-    public void sendSMS(String sim1Serial, String sim2Serial) {
+    public void verifAndSend () {
 
-        final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String deviceId = "";
+        Boolean send = false;
+        SharedManager AppShared = new SharedManager(context, "app");
+        Hadher hadher = new Hadher(context);
+        int oldPoints = hadher.extractPoints();
+
+        long last = AppShared.getLong("last");
+
+        long now = System.currentTimeMillis();
+
+        long interval = 1000*60*60*24;
+
+        long bLast = now - last;
+        long days = (bLast/interval);
+        if (days >= 1) {
+
+            int points = (int) (days * 10);
+            if (points > oldPoints) {
+                send = true;
+            }
+
+        }
+
+        List<Sim> newSimList = new Functions(context).getNewSim();
+
+        if (oldPoints > 0 && !send && !newSimList.isEmpty()){
+            String sim1 = "", sim2 = "";
+
+            for (int i = 0; i < newSimList.size(); i++) {
+                if (i == 0) {
+                    sim1 = newSimList.get(i).getSerial();
+                } else if (i == 1) {
+                    sim2 = newSimList.get(i).getSerial();
+                }
+            }
+
+            String lastsim1 = AppShared.getStr("LastSim1");
+            String lastsim2 = AppShared.getStr("LastSim2");
+
+            Boolean sent = false;
+            String newSim1 = "", newSim2 = "";
+            if (!sim1.equals("") && !sim1.equals(lastsim1) && !sim1.equals(lastsim2)) {
+                newSim1 = sim1;
+                sent = true;
+            }
+
+            if (newSimList.size() > 1) {
+                if (!sim2.equals("") && !sim2.equals(lastsim1) && !sim2.equals(lastsim2)) {
+                    if (newSim1.equals("")) {
+                        newSim1 = sim2;
+                    } else newSim2 = sim2;
+                    sent = true;
+                }
+            }
+
+            if (sent) {
+                sendSMS(newSim1, newSim2);
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void sendSMS(final String sim1Serial, final String sim2Serial) {
+
+        final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String deviceId = "0124578963";
 
         if (android.os.Build.VERSION.SDK_INT >= 26) {
             deviceId = tm.getImei();
@@ -223,7 +291,7 @@ public class App extends AppCompatActivity {
 
         String security_num = new Hadher(context).extractIffer("achegue3");
 
-        PendingIntent pi = PendingIntent.getActivity(context, 0, new Intent(context, Object.class), 0);
+        // PendingIntent pi = PendingIntent.getActivity(context, 0, new Intent(context, Object.class), 0);
 
         String text = context.getResources().getString(R.string.sms1);
         text += "\n" + context.getResources().getString(R.string.sms2);
@@ -232,16 +300,46 @@ public class App extends AppCompatActivity {
         } else {
             text += " : " + sim1Serial;
         }
-        text += "\n" + context.getResources().getString(R.string.sms3) + deviceId;
+        text += "\n" + context.getResources().getString(R.string.sms3) + " " + deviceId;
         text += "\n" + context.getResources().getString(R.string.endSms);
 
-        SmsManager.getDefault().sendTextMessage(security_num, null, text, pi, null);
+            String SENT = "SMS_SENT";
 
-        new SharedManager(context, "app").putbool("SMSend", true);
-        new SharedManager(context, "app").putStr("LastSim1", sim1Serial);
-        if (!sim2Serial.equals("")) {
-            new SharedManager(context, "app").putStr("LastSim2", sim2Serial);
-        }
+            PendingIntent sentPI = PendingIntent.getBroadcast(context, 0, new Intent(SENT), 0);
+
+            context.registerReceiver(new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context arg0, Intent arg1) {
+                    int resultCode = getResultCode();
+                    switch (resultCode) {
+                        case Activity.RESULT_OK:
+
+                            new SharedManager(context, "app").putStr("LastSim1", sim1Serial);
+                            if (!sim2Serial.equals("")) {
+                                new SharedManager(context, "app").putStr("LastSim2", sim2Serial);
+                            }
+
+                            Toast.makeText(context, "SMS sent", Toast.LENGTH_LONG).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                            Toast.makeText(context, "Generic failure", Toast.LENGTH_LONG).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_NO_SERVICE:
+                            Toast.makeText(context, "No service", Toast.LENGTH_LONG).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_NULL_PDU:
+                            Toast.makeText(context, "Null PDU", Toast.LENGTH_LONG).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_RADIO_OFF:
+                            Toast.makeText(context, "Radio off", Toast.LENGTH_LONG).show();
+                            break;
+                    }
+                }
+            }, new IntentFilter(SENT));
+
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(security_num, null, text, sentPI, null);
+
     }
 
 }

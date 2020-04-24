@@ -4,54 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".elements.Intro1"
-    android:background="@color/colorAccent">
+    tools:context=".elements.Intro1">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:padding="80sp">
+        android:orientation="vertical"
+        android:padding="@dimen/size24">
 
-        <ImageView
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_margin="@dimen/size24"/>
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="@dimen/size48"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/size24"
-            android:text="@string/desc_intro1"
-            android:textAlignment="center"/>
+            android:background="@color/colorRed2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/size16">
+
+            <ImageView
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_margin="@dimen/size24"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/lanchTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/size24"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/size24"
+                android:text="@string/desc_intro1"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center" />
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="#99000000"
         app:justifyContent="flex_end"
         app:alignItems="center"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/btnnext"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="@dimen/size16"
-            android:text="@string/next"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/size16"
-            android:clickable="true"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/btnnext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingVertical="@dimen/size16"
+                android:text="@string/next"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/size16"
+                android:clickable="true"/>
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:src="@drawable/ic_next"></ImageView>
+        </LinearLayout>
 
     </com.google.android.flexbox.FlexboxLayout>
 

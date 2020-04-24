@@ -1,23 +1,24 @@
 <resources>
     <string name="app_name">Secure</string>
     <string name="byuccendigital">By uccen digital</string>
-    <string name="copyright">Secure by uccen digital © 2019</string>
+    <string name="copyright">Secure by uccen digital © 2020</string>
 
     <!--
     Introduction
     -->
-    <string name="desc_intro1">Une petite application anti-vol, legère, simple, et très utile.</string>
-    <string name="title_intro2">Les permissions</string>
-    <string name="desc_intro2">Veuillez accoder les permissions nécéssaires pour pouvoir détecter le changement de cartes SIM.</string>
-    <string name="title_intro3">Numéro de sécurité</string>
-    <string name="desc_intro3">Ce numéro est utile pour que l\'application puisse vous contacter en cas de changement de SIM.</string>
+    <string name="desc_intro1">Une petite application antivol, legère, simple, et très utile.</string>
+    <string name="title_intro2">Liste blanche</string>
+    <string name="desc_intro2">Pour que vos cartes sim ne soient pas détecter inconnues, vous pouvez les ajouter et celles de votre famille à la liste blanche.</string>
+    <string name="title_intro3">Numéro de confiance</string>
+    <string name="desc_intro3">Configurer un numéro de téléphone de confiance, qui sera contacter par sms avec les numéros de series de téléphone et des cartes sim inconnues.</string>
     <string name="title_intro4">Masquer l\'application</string>
-    <string name="desc_intro4">Pour plus de discrétion, vous pouvez masquer l\'application et désigner dans les paramètres une méthode pour la lancer.</string>
+    <string name="desc_intro4">Pour plus de discrétion, activer la fonction masquer l\'app, \ncacher l\'icône et lance là à partir de votre clavier téléphonique.</string>
+    <string name="title_intro5">Gratuit et économique</string>
+    <string name="desc_intro5">Secure ne vous coûtera rien de tout, vous sécuriserez votre téléphone et votre poche.</string>
 
     <!--
     La sécurité
     -->
-
     <string name="vos_points_sont">Vos points sont à</string>
     <string name="new_sim_to_whitelist">Nouvelle sim : \n Ajouter les à la liste blanche ?</string>
 
@@ -31,20 +32,21 @@
 
     <string name="permissions">Permissions</string>
     <string name="permissions_notdone">Vous devez accordé les permissions nécessaires</string>
+    <string name="permissions_done">Toutes les permissions nécessaires sont accordés</string>
     <string name="security_num_notdone">Vous deves configuré un numéro de sécurité</string>
-    <string name="appisshowed">Secure apparait dans la liste des applications</string>
+    <string name="security_num_done">Le numéro de confiance est bien configuré</string>
+    <string name="hideapp_notdone">Secure apparait dans la liste des applications</string>
+    <string name="hideapp_done">L\'icon de l\'application est bien masquée</string>
 
     <!--
     Les paramètres
     -->
     <string name="settings">Paramètres</string>
-    <string name="theme">Thème</string>
-    <string name="dark_theme">Thème sombre</string>
     <string name="notifications">Notifications</string>
-    <string name="notifications_desc">Vous notifier lors de l\'epuisement de vos points</string>
-    <string name="hide_app">Masquer d\'application</string>
+    <string name="notifications_desc">Masquer les notifications d\'avertissement lors de l\'épuisement de vos points</string>
+    <string name="hide_app">Masquer l\'application</string>
     <string name="hide_desc">Masquer/Afficher l\'application de la liste des applications</string>
-    <string name="security_num">Numéro de sécurité</string>
+    <string name="security_num">Numéro de confiance</string>
     <string name="security_num_desc">Ce numéro sera contacté automatiquement par sms en cas de changement de SIM non reconnus</string>
     <string name="whitelist">Liste blanche</string>
     <string name="whitelist_desc">Liste des cartes sim autorisés</string>
@@ -59,11 +61,13 @@
     <string name="name_phonenumber">Saisir un nom/numéro de téléphone</string>
     <string name="serialnumber">Saisir le numéro de série</string>
     <string name="hideAppHelp">Cette fonctionnalité vous permet de masquer l\'icon de la liste des applications, et pour la lancer il vous suffit de l\'activer et de faire un appel à un numéro de lancement qui est nécéssaire.</string>
-    <string name="luancher_num">Numéro de lancement</string>
+    <string name="luancher_num">Code de lancement</string>
     <string name="nothing_num">Aucun numéro n\'a été ajouter</string>
     <string name="add_phonenumber">Ajouter un numéro de téléphone</string>
     <string name="securityNumHelp">Ce numéro sera utile pour pouvoir vous envoyer un sms automatiquement en cas de detection de changement d\'une nouvelle carte sim non reconnue</string>
     <string name="empty_list">La liste est vide</string>
+    <string name="addedwhitelist">Ajouter à la liste blanche</string>
+    <string name="whitelistHelp">Vous pouvez ajouter les noms et les numéros de serie de vos cartes SIM pour qu\'elles ne déclenchent pas l\'envoie de sms inutilement.</string>
 
     <!--
     Les buttons
@@ -85,10 +89,8 @@
     -->
     <string name="sms1">Nouvelle sim:</string>
     <string name="sms2">Sim</string>
-    <string name="sms3">Device :</string>
+    <string name="sms3">Device:</string>
     <string name="endSms">Secure à votre service</string>
-
-    <string name="addedwhitelist">Ajouter à la liste blanche</string>
 
     <!--
     Le Store
@@ -99,5 +101,12 @@
     <string name="info_points_store">La sécurité vous coûte 10 points par jour, pensez toujours à vérifier votre solde de points.</string>
     <string name="show_video">Voir une vidéo</string>
     <string name="soldenegative">Votre solde de points est négative pour l\'activer</string>
+
+    <!--
+    Help
+    -->
+    <string name="help">Aide</string>
+    <string name="dontshow">Ne plus afficher</string>
+    <string name="helpContent">Secure est une application antivol, aprés sa configuration elle surveillera votre téléphone, en cas de vol ou de son perte, elle s\'enchargera de vous envoyer un sms avec les coordonnées nécessaires pour pouvoir le retrouver (les numéros de serie des cartes sim non reconnus placées dedans, ainsi que le numéro de serie de votre téléphone).\nPour configuer l\'application, il vous suffit:\n1- Accorder les permissions nécessaires (Effectuer et gérer les appels, Envois et consultation des messages):\nL\'accès aux appels sera dans le but de pouvoir récupérer les informations des cartes sim et du téléphone, afin de pouvoir détecter et distinguer les cartes inconnues, tandis que l\'accès aux messages est pour l\'envoi d\'un sms en cas de changement de sim suspect.\n2- Ajouter un numéro de téléphone de confiance qui sert à vous envoyer un message avec les nouvelles coordonnées (comme un numéro de téléphone d\'un membre de famille ou d\'un proche).\nL\'application fonctionne avec un systeme de points et vous avez 7 jours offerts au démarrage de l\'application, et par la suite vous pouvez regarder des vidéos dans le store qui vous fera gagner des points en plus.\nFonctionnalité:\nMasquer l\'application: Vous pouvez masquer l\'application de la liste des applications afin qu\'elle ne soit pas facilement accessible aux autres, son lancement est quasi impossible sauf avec un appel à un code de lancement que vous aurez saisi à l\'activation de cette fonction.\nListe blanche: Vous pouvez ajouter plusieurs numéros de serie de vos cartes sim afin qu\'elles soient reconnues par l\'application et éviter ainsi l\'envoi de messages inutilement.\nNotifications: Vous pouvez choisir entre être avertis ou pas à l\'épuisement de vos points, l\'application va vous notifier 2 jours avant pour que vous puissiez recharger votre solde de points à l\'avance.</string>
 
 </resources>

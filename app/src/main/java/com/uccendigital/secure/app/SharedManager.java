@@ -23,6 +23,14 @@ public class SharedManager {
         return this.prefs.getInt(index, -1);
     }
 
+    public void putLong(String index, long value) {
+        this.editor.putLong(index, value).commit();
+    }
+
+    public long getLong(String index) {
+        return this.prefs.getLong(index, -1);
+    }
+
     public void putStr(String index, String value) {
         this.editor.putString(index, value).commit();
     }

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorGrey2">
+    android:background="@color/colorPrimaryDark">
 
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
@@ -42,6 +42,6 @@
             android:id="@+id/listoptions"
             android:layout_width="100sp"
             android:layout_height="50sp"
-            android:src="@drawable/close"></ImageView>
+            android:src="@drawable/ic_delete"></ImageView>
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

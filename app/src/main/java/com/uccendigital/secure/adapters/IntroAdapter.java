@@ -8,6 +8,7 @@ import com.uccendigital.secure.elements.Intro1;
 import com.uccendigital.secure.elements.Intro2;
 import com.uccendigital.secure.elements.Intro3;
 import com.uccendigital.secure.elements.Intro4;
+import com.uccendigital.secure.elements.Intro5;
 
 public class IntroAdapter extends FragmentPagerAdapter {
     public IntroAdapter(FragmentManager fm) {
@@ -25,6 +26,8 @@ public class IntroAdapter extends FragmentPagerAdapter {
                 return new Intro3();
             case 3:
                 return new Intro4();
+            case 4:
+                return new Intro5();
             default:
                 return null;
         }
@@ -32,6 +35,6 @@ public class IntroAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 }
